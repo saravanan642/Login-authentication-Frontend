@@ -5,6 +5,7 @@ import Header from "./Compoentes/Header";
 import Home from "./Compoentes/Home";
 import CreateAccount from "./Compoentes/Login/CreateAccount";
 import OTP from "./Compoentes/Login/OTP";
+import SendOtp from "../src/Compoentes/Login/SendOtp"
 
 function App() {
   return (
@@ -13,19 +14,18 @@ function App() {
       <div className="App">
 
         <Header />
-        
 
+       
         <Routes>
 
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home />} />
 
-          <Route path="/register" element={<CreateAccount />}/>
+          <Route path="/register" element={<CreateAccount />} />
 
-          <Route path="/otp" element ={ <OTP />} />
-
-        </Routes>
+          <Route path="/otp" element={<SendOtp />} /> </Routes>
 
       </div>
+       <OTP />
 
     </BrowserRouter>
   );
