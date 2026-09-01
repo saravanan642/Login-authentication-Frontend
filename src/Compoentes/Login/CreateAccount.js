@@ -19,7 +19,6 @@ const CreateAccount = () => {
         role: "user"
     });
 
-
     // Handle Input Change
     const handleChange = (e) => {
         setFormData({
@@ -28,17 +27,27 @@ const CreateAccount = () => {
         });
     };
 
-
     // Submit Form
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(formData);
+        // Password check
+        if (formData.newpassword !== formData.confirmpassword) {
+            alert("Passwords do not match");
+            return;
+        }
 
-        // Go to OTP page
+        // Save ALL Create Account data
+        localStorage.setItem(
+            "signupData",
+            JSON.stringify(formData)
+        );
+
+        console.log("Signup Data:", formData);
+
+        // Go to Send OTP page
         navigate("/otp");
     };
-
 
     return (
         <div className="min-h-screen bg-white py-14 px-6">
@@ -57,7 +66,6 @@ const CreateAccount = () => {
                     </p>
 
                 </div>
-
 
                 {/* Form */}
                 <form
@@ -84,7 +92,6 @@ const CreateAccount = () => {
 
                     </div>
 
-
                     {/* Email + Contact */}
                     <div className="grid md:grid-cols-2 gap-6">
 
@@ -106,7 +113,6 @@ const CreateAccount = () => {
 
                         </div>
 
-
                         <div>
 
                             <label className="block text-base font-medium text-gray-700 mb-2">
@@ -127,11 +133,9 @@ const CreateAccount = () => {
 
                     </div>
 
-
                     {/* New Password + Confirm Password */}
                     <div className="grid md:grid-cols-2 gap-6 mt-6">
 
-                        {/* New Password */}
                         <div>
 
                             <label className="block text-base font-medium text-gray-700 mb-2">
@@ -150,8 +154,6 @@ const CreateAccount = () => {
 
                         </div>
 
-
-                        {/* Confirm Password */}
                         <div>
 
                             <label className="block text-base font-medium text-gray-700 mb-2">
@@ -172,7 +174,6 @@ const CreateAccount = () => {
 
                     </div>
 
-
                     {/* Age */}
                     <div className="mt-6">
 
@@ -190,7 +191,6 @@ const CreateAccount = () => {
                         />
 
                     </div>
-
 
                     {/* Gender */}
                     <div className="mt-6">
@@ -226,7 +226,6 @@ const CreateAccount = () => {
 
                     </div>
 
-
                     {/* Address */}
                     <div className="mt-6">
 
@@ -245,11 +244,9 @@ const CreateAccount = () => {
 
                     </div>
 
-
                     {/* City + State */}
                     <div className="grid md:grid-cols-2 gap-6 mt-6">
 
-                        {/* City */}
                         <div>
 
                             <label className="block text-base font-medium text-gray-700 mb-2">
@@ -267,8 +264,6 @@ const CreateAccount = () => {
 
                         </div>
 
-
-                        {/* State */}
                         <div>
 
                             <label className="block text-base font-medium text-gray-700 mb-2">
@@ -287,7 +282,6 @@ const CreateAccount = () => {
                         </div>
 
                     </div>
-
 
                     {/* Role */}
                     <div className="mt-6">
@@ -315,7 +309,6 @@ const CreateAccount = () => {
 
                     </div>
 
-
                     {/* Create Account Button */}
                     <button
                         type="submit"
@@ -323,7 +316,6 @@ const CreateAccount = () => {
                     >
                         Create Account
                     </button>
-
 
                     {/* Login */}
                     <p className="text-center text-base text-gray-500 mt-6">

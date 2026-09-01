@@ -40,14 +40,14 @@ const Header = () => {
           </Link>
 
           <Link
-            to="/about"
+            to=""
             className="text-gray-700 font-medium hover:text-indigo-600 transition"
           >
             About
           </Link>
 
           <Link
-            to="/contact"
+            to=""
             className="text-gray-700 font-medium hover:text-indigo-600 transition"
           >
             Contact

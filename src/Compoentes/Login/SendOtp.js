@@ -1,29 +1,78 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const OTP = () => {
 
-    const [email, setEmail] = useState("");
-    const [otp, setOtp] = useState("");
+    // Create Account-la save panna full data
+    const signupData = JSON.parse(
+        localStorage.getItem("signupData")
+    );
 
+    // Email automatic-ah varum
+    const [email, setEmail] = useState(
+        signupData?.email || ""
+    );
+
+    const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
 
+    const navigate = useNavigate();
 
-    // Send OTP
-    const handleSendOtp = () => {
+
+  
+    // SEND OTP
+  
+    const handleSendOtp = async () => {
 
         if (!email) {
-            alert("Please enter your email");
+            alert("Email not found");
             return;
         }
 
-        setOtpSent(true);
+        try {
 
-        console.log("OTP sent to:", email);
+            const response = await fetch(
+                "http://localhost:8000/send-OTP",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+
+            console.log(data);
+
+            if (response.ok) {
+
+                alert(data.message);
+
+                setOtpSent(true);
+
+            } else {
+
+                alert(data.message || "OTP sending failed");
+
+            }
+
+        } catch (error) {
+
+            console.log(error);
+            alert("Server Error");
+
+        }
     };
 
-
-    // Verify OTP
-    const handleVerifyOtp = (e) => {
+    // VERIFY OTP
+    
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -32,11 +81,55 @@ const OTP = () => {
             return;
         }
 
-        console.log("Entered OTP:", otp);
+        if (otp.length !== 6) {
+            alert("Please enter 6 digit OTP");
+            return;
+        }
 
-        alert("OTP Verified Successfully");
+        try {
+
+            const response = await fetch(
+                "http://localhost:8000/verify-otp",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                        otp: otp,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+
+            console.log(data);
+
+            if (response.ok) {
+
+                alert(data.message);
+
+                // OTP verified successfully
+                navigate("/login");
+
+            } else {
+
+                alert(data.message || "Invalid OTP");
+
+            }
+
+        } catch (error) {
+
+            console.log(error);
+            alert("Server Error");
+
+        }
     };
 
+    // UI
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center px-6">
@@ -68,6 +161,7 @@ const OTP = () => {
                 {/* Card */}
                 <div className="border border-gray-200 rounded-2xl p-8 shadow-sm">
 
+
                     {/* Email */}
                     <div>
 
@@ -78,9 +172,8 @@ const OTP = () => {
                         <input
                             type="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
-                            className="w-full px-5 py-3.5 border border-gray-300 rounded-lg outline-none focus:border-indigo-500"
+                            readOnly
+                            className="w-full px-5 py-3.5 border border-gray-300 rounded-lg outline-none bg-gray-50"
                         />
 
                     </div>
@@ -117,14 +210,16 @@ const OTP = () => {
                                     type="text"
                                     value={otp}
                                     onChange={(e) => {
+
                                         const value = e.target.value;
 
                                         if (/^\d{0,6}$/.test(value)) {
                                             setOtp(value);
                                         }
+
                                     }}
                                     placeholder="Enter 6-digit OTP"
-                                    maxLength="6"
+                                    maxLength={6}
                                     className="w-full mt-5 px-5 py-4 text-center text-xl tracking-[8px] border border-gray-300 rounded-lg outline-none focus:border-indigo-500"
                                 />
 
@@ -132,14 +227,14 @@ const OTP = () => {
                                 {/* Verify OTP */}
                                 <button
                                     type="button"
-                                    onClick={handleVerifyOtp}
+                                    onClick={handleSubmit}
                                     className="w-full mt-5 py-3.5 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition"
                                 >
                                     Verify OTP
                                 </button>
 
 
-                                {/* Resend */}
+                                {/* Resend OTP */}
                                 <p className="text-center text-sm text-gray-500 mt-5">
 
                                     Didn't receive the code?
