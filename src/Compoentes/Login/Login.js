@@ -46,8 +46,15 @@ const Login = () => {
 
                 alert(data.message || "Login successful");
 
-                // Login success
-                navigate("/");
+                const role = data.data.role;
+
+                if (role === "admin") {
+                    navigate("/admin");
+                } else if (role === "user") {
+                    navigate("/user");
+                } else {
+                    alert("Invalid role");
+                }
 
             } else {
 

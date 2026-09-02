@@ -6,6 +6,8 @@ import Home from "./Compoentes/Home";
 import CreateAccount from "./Compoentes/Login/CreateAccount";
 import SendOtp from "./Compoentes/Login/SendOtp";
 import Login from "./Compoentes/Login/Login";
+import User from "./Compoentes/Role Navigation/User";
+import Admin from "./Compoentes/Role Navigation/Admin";
 
 function App() {
   return (
@@ -15,15 +17,20 @@ function App() {
 
         <Header />
 
+
         <Routes>
 
           <Route path="/" element={<Home />} />
 
-          <Route path="/register" element={<CreateAccount />}/>
+          <Route path="/register" element={<CreateAccount />} />
 
           <Route path="/otp" element={<SendOtp />} />
 
           <Route path="/login" element={<Login />} />
+
+          <Route path="/user" element={<User />} />
+
+          <Route path="/admin" element={ <Admin />} />
 
         </Routes>
 
