@@ -8,6 +8,7 @@ import SendOtp from "./Compoentes/Login/SendOtp";
 import Login from "./Compoentes/Login/Login";
 import User from "./Compoentes/Role Navigation/User";
 import Admin from "./Compoentes/Role Navigation/Admin";
+import ForgotPassword from "./Compoentes/Login/Forgotpassword";
 
 function App() {
   return (
@@ -16,7 +17,6 @@ function App() {
       <div className="App">
 
         <Header />
-
 
         <Routes>
 
@@ -27,6 +27,8 @@ function App() {
           <Route path="/otp" element={<SendOtp />} />
 
           <Route path="/login" element={<Login />} />
+
+          <Route path="/forgot-password" element ={<ForgotPassword />} />
 
           <Route path="/user" element={<User />} />
 
