@@ -9,6 +9,8 @@ import Login from "./Compoentes/Login/Login";
 import User from "./Compoentes/Role Navigation/User";
 import Admin from "./Compoentes/Role Navigation/Admin";
 import ForgotPassword from "./Compoentes/Login/Forgotpassword";
+import Resetpassword from "./Compoentes/Login/Resetpasseord";
+import Settings from "./Compoentes/Login/Setting";
 
 function App() {
   return (
@@ -28,11 +30,15 @@ function App() {
 
           <Route path="/login" element={<Login />} />
 
-          <Route path="/forgot-password" element ={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           <Route path="/user" element={<User />} />
 
-          <Route path="/admin" element={ <Admin />} />
+          <Route path="/admin" element={<Admin />} />
+
+          <Route path="/reset-password" element={<Resetpassword />} />
+
+          <Route path="/settings" element={<Settings />} />
 
         </Routes>
 

@@ -39,7 +39,7 @@ const Admin = () => {
             📊 Reports
           </button>
 
-          <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+          <button onClick={() => navigate("/settings")} className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-800 transition">
             ⚙️ Settings
           </button>
 
@@ -340,7 +340,7 @@ const Admin = () => {
                   📊 View Reports
                 </button>
 
-                <button className="w-full bg-gray-700 hover:bg-gray-800 text-white py-3 rounded-lg font-medium transition">
+                <button onClick={() => navigate("/settings")} className="w-full bg-gray-700 hover:bg-gray-800 text-white py-3 rounded-lg font-medium transition">
                   ⚙️ Settings
                 </button>
 

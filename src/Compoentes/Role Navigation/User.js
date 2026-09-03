@@ -124,7 +124,7 @@ const User = () => {
               Manage your account settings.
             </p>
 
-            <button className="text-purple-600 font-medium hover:underline">
+            <button onClick={() => navigate("/settings")} className="text-purple-600 font-medium hover:underline">
               Settings →
             </button>
           </div>
